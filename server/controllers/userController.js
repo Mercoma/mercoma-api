@@ -9,3 +9,4 @@ module.exports.getUsers = (req, res) => {
             console.log(err);
         });
 }
+
