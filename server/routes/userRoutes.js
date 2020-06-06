@@ -3,8 +3,16 @@ const passport = require('../auth'),
     users = require('../controllers/userController');
 
 router.post('/signin', (req, res, next) => {
-    console.log('reee');
-    res.send("here's a resource");
+    passport.authenticate('local-signin', (err, user, info) => {
+        if (err) {
+            res.status(400).json({
+                status: 'error',
+                message: err || 'Internal Server Error',
+            });
+        } else {
+            res.json(user);
+        }
+    })(req, res, next);
 });
 
 router.post('/signup', (req, res, next) => {
@@ -15,10 +23,7 @@ router.post('/signup', (req, res, next) => {
                 message: err || 'Internal Server Error',
             });
         } else {
-            res.status(200).json({
-                status: 'authenticated',
-                message: user,
-            });
+            res.json(user);
         }
     })(req, res, next);
 });

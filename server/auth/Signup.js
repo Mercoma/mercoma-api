@@ -6,19 +6,20 @@ const User = require('../models/User');
 // When a user signs up, do this
 const SignupStrategy = new LocalStrategy(
     { passReqToCallback: true, usernameField: 'email' },
-    (req, username, password, done) => {
+    (req, email, password, done) => {
         User.findOne({
             where: {
-                email: username,
+                email,
             },
         })
             .then((user) => {
+                console.log(user);
                 if (!user) {
                     const salt = bcrypt.genSaltSync(10);
                     const hash = bcrypt.hashSync(password, salt);
                     const { avatar, firstname, lastname } = req.body;
                     User.create({
-                        email: username,
+                        email: email,
                         password: hash,
                         firstname,
                         lastname,
