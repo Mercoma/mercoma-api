@@ -1,5 +1,5 @@
 {
-  "name": "mercoma",
+  "name": "mercoma-api",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -18,7 +18,7 @@
   "devDependencies": {},
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/julian-hecker/mercoma.git"
+    "url": "git+https://github.com/mercoma/mercoma-api.git"
   },
   "keywords": [
     "skin cancer",
@@ -27,7 +27,7 @@
   "author": "Julian Hecker, Jerry Turcios",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/julian-hecker/mercoma/issues"
+    "url": "https://github.com/mercoma/mercoma-api/issues"
   },
-  "homepage": "https://github.com/julian-hecker/mercoma#readme"
+  "homepage": "https://github.com/mercoma/mercoma-api#readme"
 }
