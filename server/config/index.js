@@ -3,7 +3,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 const Sequelize = require('sequelize');
-const connectionURI = process.env.DATABASE_URL;
+const connectionURI = process.env.CLEARDB_DATABASE_URL;
 
 const db = new Sequelize(connectionURI, {
     pool: {
