@@ -1,5 +1,6 @@
 // === Packages ===
 const express = require('express'),
+    busboyBodyParser = require('busboy-body-parser'),
     cors = require('cors'),
     cookieParser = require('cookie-parser'),
     // cookieSession = require('cookie-session'),
@@ -10,7 +11,7 @@ const express = require('express'),
 const app = express(),
     buildDirectory = path.join(__dirname, '..', 'build'),
     passport = require('./auth');
-    
+
 app.use(cookieParser('awdawdawdawdawd'));
 app.use(
     session({
@@ -28,7 +29,8 @@ app.use(
 );
 app.use(cors({ credentials: true, origin: true }));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
+app.use(busboyBodyParser({ multi: true }));
 app.use(express.static(buildDirectory));
 app.use(passport.initialize());
 app.use(passport.session());
