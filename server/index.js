@@ -11,9 +11,12 @@ const app = express(),
 
 app.use(
     cookieSession({
-        maxAge: 24 * 60 * 60 * 1000,
+        cookie: {
+            maxAge: 24 * 60 * 60 * 1000,
+        },
         name: 'session',
         keys: ['beee89b4', '89b4beee'],
+        secret: true,
     }),
 );
 app.use(cors());

@@ -41,7 +41,7 @@ module.exports.getFromUser = (req, res) => {
     const { id } = req.user;
     Image.findAll({
         where: {
-            userId: userId,
+            userId: id,
         },
     })
         .then((images) => {
