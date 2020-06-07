@@ -16,11 +16,11 @@ app.use(
         },
         name: 'session',
         keys: ['beee89b4', '89b4beee'],
-        secure: false,
+        // secure: false,
     }),
 );
 // app.use(cors({ credentials: true, origin: ['http://localhost:3000'] }));
-app.use(cors());
+app.use(cors({ credentials: true, origin: true }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(buildDirectory));
