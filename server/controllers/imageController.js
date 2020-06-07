@@ -28,7 +28,7 @@ module.exports.getById = (req, res) => {
 };
 
 module.exports.add = (req, res) => {
-    const { userId } = req.user;
+    const { id } = req.user;
     Image.create({})
         .then((image) => {})
         .catch((err) => {
@@ -38,7 +38,7 @@ module.exports.add = (req, res) => {
 };
 
 module.exports.getFromUser = (req, res) => {
-    const { userId } = req.user;
+    const { id } = req.user;
     Image.findAll({
         where: {
             userId: userId,

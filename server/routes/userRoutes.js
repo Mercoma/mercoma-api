@@ -3,38 +3,45 @@ const passport = require('../auth'),
     users = require('../controllers/userController');
 
 router.post('/signin', (req, res, next) => {
-    passport.authenticate('local-signin', (err, user, info) => {
-        if (err) {
-            res.status(400).json({
-                status: 'error',
-                message: err || 'Internal Server Error',
-            });
-        } else {
-            res.json(user);
-        }
-    })(req, res, next);
+    passport.authenticate('local-signin', (err, user, info) =>
+        handleAuth(err, user, info, req, res),
+    )(req, res, next);
 });
 
 router.post('/signup', (req, res, next) => {
-    passport.authenticate('local-signup', (err, user, info) => {
-        if (err) {
-            res.status(400).json({
-                status: 'error',
-                message: err || 'Internal Server Error',
-            });
-        } else {
-            res.json(user);
-        }
-    })(req, res, next);
+    passport.authenticate('local-signup', (err, user, info) =>
+        handleAuth(err, user, info, req, res),
+    )(req, res, next);
+});
+
+router.get('/signout', (req, res) => {
+    req.logout();
+    res.json('logged out');
 });
 
 router.get('/', (req, res) => {
-    users.getUsers(req, res);
+    users.getById(req, res);
 });
 
-router.post('/', (req, res) => {
-    console.log(req.body);
-    res.send(req.body);
-});
+function handleAuth(err, user, info, req, res) {
+    if (err) {
+        return res.status(400).json({
+            status: 'error',
+            message: err || "Something's broken! Oh no!",
+        });
+    } else {
+        // Persistent Login
+        req.login(user, (err, data) => {
+            if (err) {
+                return res.status(400).json({
+                    status: 'error',
+                    message: err || "Something's broken! Oh no!",
+                });
+            } else {
+                return res.json(user);
+            }
+        });
+    }
+}
 
 module.exports = router;

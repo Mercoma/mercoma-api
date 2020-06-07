@@ -13,7 +13,6 @@ const SignupStrategy = new LocalStrategy(
             },
         })
             .then((user) => {
-                console.log(user);
                 if (!user) {
                     const salt = bcrypt.genSaltSync(10);
                     const hash = bcrypt.hashSync(password, salt);
