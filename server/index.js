@@ -16,7 +16,7 @@ app.use(
         },
         name: 'session',
         keys: ['beee89b4', '89b4beee'],
-        secret: true,
+        secure: false,
     }),
 );
 app.use(cors());
@@ -36,7 +36,6 @@ app.get('*', (req, res) => {
 module.exports = app;
 
 // === Todo ===
-// Get images routes
 // http post images to backend
 // Implement ML Model
 // test betterdoctors api for the last time or else use jsonplaceholder

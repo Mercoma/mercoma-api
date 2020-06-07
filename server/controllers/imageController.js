@@ -1,29 +1,21 @@
 const Image = require('../models/Image');
 
-module.exports.getAll = (req, res) => {
-    Image.findAll()
-        .then((images) => {
-            res.status(200).json(images);
-        })
-        .catch((err) => {
-            console.log(err);
-            res.send(err);
-        });
-};
-
 module.exports.getById = (req, res) => {
     const { imageId } = req.params;
-    Image.findOne({
+    Image.findAll({
         where: {
             id: imageId,
         },
     })
         .then((images) => {
-            res.status(200).json(images);
+            return res.status(200).json(images);
         })
         .catch((err) => {
             console.log(err);
-            res.send(err);
+            return res.status(400).json({
+                status: 'error',
+                message: err,
+            });
         });
 };
 
@@ -32,10 +24,18 @@ module.exports.add = (req, res) => {
         image: req.body.image,
         userId: req.user.id,
     })
-        .then((image) => {})
+        .then((image) => {
+            return res.status(200).json({
+                status: 'success',
+                message: image,
+            });
+        })
         .catch((err) => {
             console.log(err);
-            res.send(err);
+            return res.status(400).json({
+                status: 'error',
+                message: err,
+            });
         });
 };
 
@@ -47,11 +47,16 @@ module.exports.getFromUser = (req, res) => {
         },
     })
         .then((images) => {
-            res.status(200).json(images);
+            images.forEach((image) => {
+                image.image = image.image.toString();
+            });
+            return res.status(200).json(images);
         })
         .catch((err) => {
-            console.log(err);
-            res.send(err);
+            return res.status(400).json({
+                status: 'error',
+                message: err,
+            });
         });
 };
 
@@ -64,10 +69,14 @@ module.exports.remove = (req, res) => {
         limit: 1,
     })
         .then((image) => {
-            res.status(200);
+            return res.status(200).json(image);
         })
         .catch((err) => {
-            console.log(err);
-            res.send(err);
+            return res.status(400).json({
+                status: 'error',
+                message: err,
+            });
         });
 };
+
+

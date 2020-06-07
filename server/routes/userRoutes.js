@@ -16,10 +16,16 @@ router.post('/signup', (req, res, next) => {
 
 router.get('/signout', (req, res) => {
     req.logout();
-    res.json('logged out');
+    req.session = null;
+    res.json({
+        status: 'success',
+        message: 'signed out',
+    });
 });
 
 router.get('/', (req, res) => {
+    console.log(req.session.passport);
+
     users.getById(req, res);
 });
 
