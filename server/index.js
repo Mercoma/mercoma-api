@@ -1,25 +1,31 @@
 // === Packages ===
 const express = require('express'),
     cors = require('cors'),
-    cookieSession = require('cookie-session'),
+    cookieParser = require('cookie-parser'),
+    // cookieSession = require('cookie-session'),
+    session = require('express-session'),
     path = require('path');
 
 // === App Config ===
 const app = express(),
     buildDirectory = path.join(__dirname, '..', 'build'),
     passport = require('./auth');
-
+    
+app.use(cookieParser('awdawdawdawdawd'));
 app.use(
-    cookieSession({
+    session({
+        secret: 'awdawdawdawdawd',
+        resave: false,
+        saveUninitialized: true,
         cookie: {
             maxAge: 24 * 60 * 60 * 1000,
+            httpOnly: false,
+            sameSite: false,
+            secure: false,
+            path: '/',
         },
-        name: 'session',
-        keys: ['beee89b4', '89b4beee'],
-        // secure: false,
     }),
 );
-// app.use(cors({ credentials: true, origin: ['http://localhost:3000'] }));
 app.use(cors({ credentials: true, origin: true }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

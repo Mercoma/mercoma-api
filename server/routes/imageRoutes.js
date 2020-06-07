@@ -12,6 +12,15 @@ router.post('/', checkAuth, (req, res) => {
     images.add(req, res);
 });
 
+// Get images from user ID
+router.get('/user/:id', (req, res) => {
+    images.getFromUserId(req, res);
+});
+
+router.post('/user/:id', (req, res) => {
+    images.getFromUserId(req, res);
+});
+
 // Get a single image by ID
 router.get('/:imageId', checkAuth, (req, res) => {
     images.getById(req, res);
