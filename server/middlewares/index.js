@@ -1,6 +1,6 @@
 module.exports.checkAuth = (req, res, next) => {
-    if (!req.session.passport) {
-        return res.status(401).json({
+    if (!req.user) {
+        return res.status(499).json({
             status: 'error',
             message: 'not authenticated',
         });

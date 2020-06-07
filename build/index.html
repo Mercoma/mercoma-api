@@ -122,7 +122,8 @@
             // uploadImage(imgsrc, name, 'image/jpeg');
         </script>
         <script>
-            fetch('http://mercoma.herokuapp.com/api/users', {
+            fetch('https://mercoma.herokuapp.com/api/users', {
+                mode: 'no-cors',
                 method: 'GET', // or 'PUT'
                 headers: {
                     'Content-Type': 'application/json',
