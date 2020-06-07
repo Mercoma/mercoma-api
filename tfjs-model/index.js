@@ -43,11 +43,18 @@ function b64ToImageData(image) {
     return batched;
 }
 
+function scaling(number) {
+    const result = 1 / 1 + Math.pow(Math.E, -0.005 * (number - 1000));
+    return result;
+}
+
 async function testModel(image) {
     const model = await tf.loadGraphModel(
         'file://tfjs-model/model.json',
     );
-    return model.predict(b64ToImageData(image)).data();
+    const result = await model.predict(b64ToImageData(image)).data();
+    const scaledResult = scaling(result);
+    return scaledResult;
 }
 
 module.exports = testModel;
