@@ -28,8 +28,10 @@ module.exports.getById = (req, res) => {
 };
 
 module.exports.add = (req, res) => {
-    const { id } = req.user;
-    Image.create({})
+    Image.create({
+        image: req.body.image,
+        userId: req.user.id,
+    })
         .then((image) => {})
         .catch((err) => {
             console.log(err);

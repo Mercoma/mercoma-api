@@ -12,7 +12,7 @@ const Image = sequelize.define('images', {
     },
     tumorPct: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        // allowNull: false,
     },
 });
 
